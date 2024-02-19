@@ -8,45 +8,56 @@
 import SwiftUI
 
 struct MealDetailView: View {
-    let meal: MealDetail
+    let mealID: String
+    @StateObject private var mealDetailViewModel = MealDetailViewModel()
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading) {
-                Text(meal.strMeal)
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .padding(.top)
-
-                AsyncImage(url: meal.strMealThumb) { image in
-                    image.resizable()
-                } placeholder: {
-                    ProgressView()
-                }
-                .aspectRatio(contentMode: .fit)
-                .cornerRadius(12)
-                .padding()
-
-                Text("Instructions")
-                    .font(.headline)
-                    .padding(.bottom, 5)
-
-                Text(meal.strInstructions)
-                    .font(.body)
-                    .padding(.bottom)
-
-                Text("Ingredients")
-                    .font(.headline)
-                    .padding(.bottom, 5)
-
-                ForEach(meal.ingredientsAndMeasures, id: \.self) { ingredient in
-                    Text(ingredient)
+            if let mealDetail = mealDetailViewModel.mealDetail {
+                VStack(alignment: .leading, spacing: 20) {
+                    Text(mealDetail.strMeal)
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                    
+                    AsyncImage(url: mealDetail.strMealThumb) { image in
+                        image.resizable()
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    .aspectRatio(contentMode: .fit)
+                    
+                    Text("Instructions")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                    
+                    Text(mealDetail.strInstructions)
                         .font(.body)
+                        .padding(.bottom)
+                    
+                    Text("Ingredients")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                    
+                    ForEach(mealDetail.ingredientsAndMeasures, id: \.self) { ingredient in
+                        Text(ingredient)
+                            .font(.body)
+                    }
+                    
+                    Spacer()
                 }
+                .padding()
+            } else if mealDetailViewModel.isLoading {
+                ProgressView("Loading...")
+            } else {
+                Text("No recipe available at this time 😞")
+                    .foregroundColor(.secondary)
             }
-            .padding(.horizontal)
         }
-        .navigationBarTitle("Recipe", displayMode: .inline)
+        .navigationTitle("Meal Details")
+        .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            mealDetailViewModel.loadMealDetail(mealID: mealID)
+        }
     }
 }
 
@@ -63,7 +74,7 @@ struct MealDetailView_Previews: PreviewProvider {
             measures: ["200ml", "60ml", "2", "1600g", "3 tsp", "1/2 tsp", "25g", "45g", "3 tbs"]
         )
 
-        MealDetailView(meal: sampleMealDetail)
+        MealDetailView(mealID: "53049")
     }
 }
 

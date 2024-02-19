@@ -3,68 +3,69 @@
 //  fetch-iOS-challenge
 //
 //  Created by AASHI  SHRIMAL on 2/14/24.
-// 
+//
 import SwiftUI
 
 struct DessertListView: View {
     @StateObject private var viewModel = DessertListViewModel()
+    @State private var showHint = true
     
     var body: some View {
         NavigationView {
-            List(viewModel.desserts) { dessert in
-                NavigationLink(destination: MealDetailView(meal: viewModel.selectedMealDetail ?? MealDetail.defaultValue)) {
-                    DessertRowView(dessert: dessert)
+            ZStack(alignment: .center){
+                dessertList
+                    .navigationTitle("Desserts")
+                    .overlay(loadingOverlay)
+                    .alert(isPresented: $viewModel.showError, content: errorAlert)
+                    .onAppear(perform: viewModel.fetchDesserts)
+                // Hint overlay
+                if showHint {
+                    HintView(showHint: $showHint) // The custom view for displaying the hint
                 }
-                .onTapGesture {
-                    viewModel.selectDessert(with: dessert.idMeal)
-                }
-            }
-            .navigationTitle("Desserts")
-            .overlay {
-                if viewModel.isLoading {
-                    ProgressView("Loading...")
-                }
-            }
-            .alert(isPresented: $viewModel.showError) {
-                Alert(
-                    title: Text("Error"),
-                    message: Text(viewModel.errorMessage),
-                    dismissButton: .default(Text("OK"))
-                )
-            }
-            .onAppear {
-                viewModel.fetchDesserts()
             }
         }
     }
-}
-
-struct DessertRowView: View {
-    let dessert: Meal
     
-    var body: some View {
-        HStack {
-            AsyncImage(url: dessert.strMealThumb) { image in
-                image.resizable()
-            } placeholder: {
-                ProgressView()
+    private var dessertList: some View {
+        List {
+            ForEach(viewModel.sectionTitles, id: \.self) { letter in
+                dessertSection(letter: letter)
             }
-            .frame(width: 50, height: 50)
-            .cornerRadius(5)
-            
-            Text(dessert.strMeal)
         }
+    }
+    
+    private func dessertSection(letter: String) -> some View {
+        Section(header: Text(letter)) {
+            ForEach(viewModel.dessertsGroupedByFirstLetter[letter] ?? []) { dessert in
+                dessertRow(for: dessert)
+            }
+        }
+    }
+    
+    private func dessertRow(for dessert: Meal) -> some View {
+        NavigationLink(destination: MealDetailView(mealID: dessert.idMeal))  {
+            DessertRowView(dessert: dessert)
+        }
+    }
+    
+    private var loadingOverlay: some View {
+        Group {
+            if viewModel.isLoading {
+                ProgressView("Loading...")
+            }
+        }
+    }
+    
+    private func errorAlert() -> Alert {
+        Alert(
+            title: Text("Error"),
+            message: Text(viewModel.errorMessage),
+            dismissButton: .default(Text("OK"))
+        )
     }
 }
 
-struct DessertDetailView: View {
-    let dessertId: String
-    // This view would have its own ViewModel to load the dessert details
-    // For simplicity, we're just showing the ID here
-    var body: some View {
-        Text("Dessert details for ID: \(dessertId)")
-    }
-}
+
 
 extension MealDetail {
     static var defaultValue: MealDetail {

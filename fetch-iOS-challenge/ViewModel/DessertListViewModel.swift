@@ -31,19 +31,13 @@ class DessertListViewModel: ObservableObject {
             }
         }
     }
-    //Meal Detail
-    func selectDessert(with id: String) {
-        self.selectedMealDetail = nil // Clear previous detail
-        mealService.fetchMealDetails(by: id) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let mealDetailList):
-                    self?.selectedMealDetail = mealDetailList.meals.first
-                case .failure:
-                    // Handle the error, you could also set an error message here to display
-                    self?.selectedMealDetail = nil
-                }
-            }
-        }
+    // Group desserts by the first letter of their name
+    var dessertsGroupedByFirstLetter: [String: [Meal]] {
+        Dictionary(grouping: desserts, by: { String($0.strMeal.prefix(1)) })
+    }
+    
+    // Sorted section titles
+    var sectionTitles: [String] {
+        dessertsGroupedByFirstLetter.keys.sorted()
     }
 }
