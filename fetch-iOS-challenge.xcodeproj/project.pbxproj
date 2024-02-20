@@ -20,6 +20,7 @@
 		2A5343B42B803AFE00191403 /* MealDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5343B32B803AFE00191403 /* MealDetailViewModel.swift */; };
 		2A5343B62B83E4B600191403 /* DesertRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5343B52B83E4B600191403 /* DesertRowView.swift */; };
 		2A5343B82B83E67100191403 /* HintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5343B72B83E67100191403 /* HintView.swift */; };
+		2AA05FE92B83F87300D3C0FF /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA05FE82B83F87300D3C0FF /* CheckBoxView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		2A5343B32B803AFE00191403 /* MealDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailViewModel.swift; sourceTree = "<group>"; };
 		2A5343B52B83E4B600191403 /* DesertRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesertRowView.swift; sourceTree = "<group>"; };
 		2A5343B72B83E67100191403 /* HintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintView.swift; sourceTree = "<group>"; };
+		2AA05FE82B83F87300D3C0FF /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				2A5343B12B8023A200191403 /* MealDetailView.swift */,
 				2A5343B52B83E4B600191403 /* DesertRowView.swift */,
 				2A5343B72B83E67100191403 /* HintView.swift */,
+				2AA05FE82B83F87300D3C0FF /* CheckBoxView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 				2A5343B62B83E4B600191403 /* DesertRowView.swift in Sources */,
 				2A5343AB2B7C94FF00191403 /* Meal.swift in Sources */,
 				2A5343A72B7C94AE00191403 /* MealDetail.swift in Sources */,
+				2AA05FE92B83F87300D3C0FF /* CheckBoxView.swift in Sources */,
 				2A5343B22B8023A200191403 /* MealDetailView.swift in Sources */,
 				2A5343A92B7C94CD00191403 /* DessertListView.swift in Sources */,
 				2A5343AD2B7C95B700191403 /* DessertListViewModel.swift in Sources */,

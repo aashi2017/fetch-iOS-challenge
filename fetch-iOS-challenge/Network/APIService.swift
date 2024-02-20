@@ -1,3 +1,11 @@
+//
+//  Meal.swift
+//  fetch-iOS-challenge
+//
+//  Created by AASHI  SHRIMAL on 2/14/24.
+//
+
+// This class is desgined to interact with TheMealDB API to fetch meal-related data. It contains two main functionalities: 1. Fetch a list of desserts. 2. fetch details for a specific meal by its ID.
 import Foundation
 
 class MealService {

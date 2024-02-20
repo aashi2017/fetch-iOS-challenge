@@ -1,3 +1,11 @@
+//
+//  Meal.swift
+//  fetch-iOS-challenge
+//
+//  Created by AASHI  SHRIMAL on 2/14/24.
+
+// This is a model and it represents detailed information about a meal, including its ID, name, cooking instructions, image URL, ingredients, and measurements.
+
 import Foundation
 
 struct MealDetailList: Decodable {

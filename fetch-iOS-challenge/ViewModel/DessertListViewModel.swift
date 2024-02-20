@@ -3,7 +3,7 @@
 //  fetch-iOS-challenge
 //
 //  Created by AASHI  SHRIMAL on 2/14/24.
-//
+//The class provides functionality to fetch dessert data from a service, handle the result, and manage the data for display, such as grouping desserts by their first letter and sorting section titles.
 import Combine
 import Foundation
 class DessertListViewModel: ObservableObject {
@@ -12,6 +12,7 @@ class DessertListViewModel: ObservableObject {
     @Published var showError: Bool = false
     @Published var errorMessage: String = ""
     @Published var selectedMealDetail: MealDetail?
+    
     
     private var mealService = MealService()
     private var cancellables = Set<AnyCancellable>()

@@ -4,17 +4,23 @@
 //
 //  Created by AASHI  SHRIMAL on 2/19/24.
 //
+//
+
+//This view represnts custom hint view component, designed to display a hint or instructional overlay to the user. 
 
 import SwiftUI
 
 struct HintView: View {
     @Binding var showHint: Bool
+    let title: String
+    let subtitle: String
+    let description: String
     
     var body: some View {
         VStack {
             Spacer()
             
-            TextBubbleView()
+            TextBubbleView(title: title, subtitle: subtitle, description: description)
             
             Button("Got it!") {
                 withAnimation {
@@ -34,17 +40,19 @@ struct HintView: View {
 }
 
 struct TextBubbleView: View {
-   
+    let title: String
+    let subtitle: String
+    let description: String
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Hello, I am Aashi! 👋🏻")
+            Text(title)
                 .font(.headline)
                 .fontWeight(.bold)
-            Text("Welcome to Fetch iOS-coding-challenge!")
+            Text(subtitle)
                 .font(.subheadline)
                 .fontWeight(.bold)
-            Text("This is the Home Screen with - Dessert list in alphabetical order. Tap on a dessert to see instructions on how to make it.")
+            Text(description)
         }
         .padding()
         .background(Color.white)
@@ -54,8 +62,14 @@ struct TextBubbleView: View {
     }
 }
 
-
-
-#Preview {
-    HintView(showHint: .constant(true))
+// Usage in previews or in other views throughout your app
+struct HintView_Previews: PreviewProvider {
+    static var previews: some View {
+        HintView(
+            showHint: .constant(true),
+            title: "Hello, I am Aashi! 👋🏻",
+            subtitle: "Welcome to Fetch iOS-coding-challenge!",
+            description: "This is the Home Screen with - Dessert list in alphabetical order. Tap on a dessert to see instructions on how to make it."
+        )
+    }
 }

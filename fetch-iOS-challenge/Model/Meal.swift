@@ -3,10 +3,8 @@
 //  fetch-iOS-challenge
 //
 //  Created by AASHI  SHRIMAL on 2/14/24.
-//
 
-import Foundation
-
+// This model is designed to decode a list of meals, specifically for the Dessert category, from JSON data. It contains an array of Meal structs.
 import Foundation
 
 // Model for the list of meals in the Dessert category

@@ -4,7 +4,7 @@
 //
 //  Created by AASHI  SHRIMAL on 2/16/24.
 //
-
+//The class is responsible for fetching and storing the details of a specific meal from a meal service.
 import Foundation
 class MealDetailViewModel: ObservableObject {
     @Published var mealDetail: MealDetail?

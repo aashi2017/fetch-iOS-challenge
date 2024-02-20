@@ -4,15 +4,20 @@
 //
 //  Created by AASHI  SHRIMAL on 2/19/24.
 //
-
+//This view represents a custom checkbox component. 
 import SwiftUI
 
-struct CheckboxView: View {
+struct CheckBoxView: View {
+    @State private var isChecked: Bool = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Image(systemName: isChecked ? "checkmark.square.fill" : "square")
+            .foregroundColor(isChecked ? .green : .gray)
+            .onTapGesture {
+                self.isChecked.toggle() 
+            }
     }
 }
-
 #Preview {
-    CheckboxView()
+    CheckBoxView()
 }
