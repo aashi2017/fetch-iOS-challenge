@@ -7,6 +7,7 @@ Native iOS App featuring a list of desserts and how to make them. The app uses 2
 
 My personal creative touches
 - Grouping dessert by alphabets
+- Search bar so user can search for desserts
 - Onboarding hints for screens
 - Favorites button in the meal detail screen
 # Installation
@@ -25,10 +26,16 @@ After launching the app, you will see a list of desserts sorted alphabetically. 
 For any queries please reach me at aashishrimal@hotmail.com
 # Screenshots
 ## Dessert List View
-![Dessert List View](https://github.com/aashi2017/fetch-iOS-challenge/assets/48054246/3673b3a5-7218-4ef5-ae35-fcfc94f89a5f)
+![Dessert List](https://github.com/aashi2017/fetch-iOS-challenge/assets/48054246/4f20adb4-e8a1-41bf-a04e-a279668b74cf)
+
 ## Onboarding hints on Dessert List View
 ![Onboarding Hint](https://github.com/aashi2017/fetch-iOS-challenge/assets/48054246/bc061125-9430-4c4f-8972-224998778667)
+
+## Search Bar 
+![Search Bar fucntionality](https://github.com/aashi2017/fetch-iOS-challenge/assets/48054246/af5bbf43-e9c4-4d9d-bd28-8eb61324ba65)
+
 ## Dessert Meal View
+
 ![Detail Screen](https://github.com/aashi2017/fetch-iOS-challenge/assets/48054246/fa13903d-56e2-45b5-a73d-b6a4c20b2209)
 
 ![Detail Screen](https://github.com/aashi2017/fetch-iOS-challenge/assets/48054246/e8d6775e-c2f4-42f5-ad3a-cd837909f30f)
