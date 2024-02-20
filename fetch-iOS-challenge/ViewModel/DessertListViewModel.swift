@@ -12,10 +12,28 @@ class DessertListViewModel: ObservableObject {
     @Published var showError: Bool = false
     @Published var errorMessage: String = ""
     @Published var selectedMealDetail: MealDetail?
-    
+    @Published var searchText = "" // Holds the search text
+    @Published var filteredDesserts: [Meal] = []
     
     private var mealService = MealService()
     private var cancellables = Set<AnyCancellable>()
+    
+      init() {
+          // Combine setup to update filteredDesserts based on searchText
+          $searchText
+              .receive(on: RunLoop.main)
+              .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
+              .removeDuplicates()
+              .map { [unowned self] searchText in
+                  if searchText.isEmpty {
+                      return self.desserts
+                  } else {
+                      return self.desserts.filter { $0.strMeal.lowercased().contains(searchText.lowercased()) }
+                  }
+              }
+              .assign(to: \.filteredDesserts, on: self)
+              .store(in: &cancellables)
+      }
     
     // Function to load desserts
     func fetchDesserts() {
@@ -37,8 +55,19 @@ class DessertListViewModel: ObservableObject {
         Dictionary(grouping: desserts, by: { String($0.strMeal.prefix(1)) })
     }
     
-    // Sorted section titles
     var sectionTitles: [String] {
-        dessertsGroupedByFirstLetter.keys.sorted()
+        let relevantDesserts = searchText.isEmpty ? desserts : filteredDesserts
+        let groupedDesserts = Dictionary(grouping: relevantDesserts, by: { String($0.strMeal.prefix(1)) })
+        return groupedDesserts.filter { !$0.value.isEmpty }.keys.sorted()
+    }
+    
+    func searchResults(for letter: String) -> [Meal] {
+        if searchText.isEmpty {
+            return dessertsGroupedByFirstLetter[letter] ?? []
+        } else {
+            return (dessertsGroupedByFirstLetter[letter] ?? []).filter {
+                $0.strMeal.lowercased().contains(searchText.lowercased())
+            }
+        }
     }
 }
